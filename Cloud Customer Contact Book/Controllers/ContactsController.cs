@@ -10,10 +10,9 @@ public class ContactsController : ControllerBase
     /// <summary>
     /// Returns customer
     /// </summary>
-    /// <param name="firstName"></param>
-    /// <param name="lastName"></param>
-    /// <param name="phoneNumber"></param>
-
+    /// <param name="firstName">firstName</param>
+    /// <param name="lastName">lastName</param>
+    /// <param name="phoneNumber">phoneNumber</param>
     [HttpGet]
     public Task<IActionResult> GetAll(string? firstName = default, string? lastName = default, string? phoneNumber = default)
     {
@@ -27,10 +26,16 @@ public class ContactsController : ControllerBase
 
         return Task.FromResult<IActionResult>(Ok(result));
     }
+
+    private object GenerateFew(Func<object, ContactModel> p)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// Returns customer with the same ID
     /// </summary>
-    /// <param name="contactId"></param>
+    /// <param name="contactId">ContactId</param>
     [HttpGet("{contactId:long}")]
     public Task<IActionResult> Get(long contactId)
     {
@@ -48,7 +53,7 @@ public class ContactsController : ControllerBase
     /// Updates customer if specificed ID exists
     /// otherwise returns a 404 if ID does not exist
     /// </summary>
-    /// <param name="model"></param>
+    /// <param name="model">Model</param>
     [HttpPost]
     public Task<IActionResult> Post([FromBody] ContactCreateModel model)
     {
@@ -65,9 +70,10 @@ public class ContactsController : ControllerBase
     /// <summary>
     /// Puts data into API to create a new customer
     /// </summary>
-    /// <param name="contactId"></param>
-    /// <param name="model"></param>
+    /// <param name="contactId">ContactId</param>
+    /// <param name="model">Model</param>
     [HttpPut("{contactId:long}")]
+    [ProducesResponseType(typeof(ContactModel), StatusCodes.Status200OK)]
     public Task<IActionResult> Put(long contactId, [FromBody] ContactCreateModel model)
     {
         var result = new ContactModel
@@ -83,8 +89,9 @@ public class ContactsController : ControllerBase
     /// <summary>
     /// Deletes customer with the specified ID
     /// </summary>
-    /// <param name="contactId"></param>
+    /// <param name="contactId">ContactId</param>
     [HttpDelete("{contactId:long}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IActionResult> Delete(long contactId)
     {
         return Task.FromResult<IActionResult>(Ok());

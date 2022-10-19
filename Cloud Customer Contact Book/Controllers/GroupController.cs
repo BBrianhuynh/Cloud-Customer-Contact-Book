@@ -11,6 +11,7 @@ public class GroupsController : ControllerBase
     /// Returns group
     /// </summary>
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<GroupModel>), StatusCodes.Status200OK)]
     public Task<IActionResult> GetAll()
     {
         var result = GenerateFew(_ => new GroupModel
@@ -25,9 +26,10 @@ public class GroupsController : ControllerBase
     /// <summary>
     /// Returns group with ID
     /// </summary>
-    /// <param name="groupId"></param>
+    /// <param name="groupId">GroupId</param>
     /// <returns></returns>
     [HttpGet("{groupId:long}")]
+    [ProducesResponseType(typeof(GroupModel), StatusCodes.Status200OK)]
     public Task<IActionResult> Get(long groupId)
     {
         var result = new GroupModel
@@ -43,8 +45,9 @@ public class GroupsController : ControllerBase
     /// Updates Group if ID exists
     /// Otherwise return a 404 if ID does not exist
     /// </summary>
-    /// <param name="model"></param
+    /// <param name="model">Model</param>
     [HttpPost]
+    [ProducesResponseType(typeof(GroupModel), StatusCodes.Status200OK)]
     public Task<IActionResult> Post([FromBody] GroupCreateModel model)
     {
         var result = new GroupModel
@@ -59,9 +62,10 @@ public class GroupsController : ControllerBase
     /// <summary>
     /// Puts data into API to create a new group
     /// </summary>
-    /// <param name="groupId"></param>
-    /// <param name="model"></param
+    /// <param name="groupId">GroupId</param>
+    /// <param name="model">Model</param>
     [HttpPut("{groupId:long}")]
+    [ProducesResponseType(typeof(GroupModel), StatusCodes.Status200OK)]
     public Task<IActionResult> Put(long groupId, [FromBody] GroupCreateModel model)
     {
         var result = new GroupModel
@@ -76,14 +80,20 @@ public class GroupsController : ControllerBase
     /// <summary>
     /// Deletes group with specified ID
     /// </summary>
-    /// <param name="groupId"></param
+    /// <param name="groupId">GroupId</param>
     [HttpDelete("{groupId:long}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IActionResult> Delete(long groupId)
     {
         return Task.FromResult<IActionResult>(Ok());
     }
-
+    /// <summary>
+    /// Returns group ID from contacts
+    /// </summary>
+    /// <param name="groupId"></param>
+    /// <returns></returns>
     [HttpGet("{groupId:long}/Contacts")]
+    [ProducesResponseType(typeof(IEnumerable<long>), StatusCodes.Status200OK)]
     public Task<IActionResult> GetContacts(long groupId)
     {
         var result = GenerateFew(_ => Random.Shared.NextInt64());
