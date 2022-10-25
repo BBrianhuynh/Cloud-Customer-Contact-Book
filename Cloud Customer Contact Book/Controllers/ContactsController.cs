@@ -32,6 +32,7 @@ public class ContactsController : ControllerBase
     /// </summary>
     /// <param name="contactId">ContactId</param>
     [HttpGet("{contactId:long}")]
+    [ProducesResponseType(typeof(ContactModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(long contactId)
     {

@@ -83,10 +83,8 @@ public class GroupsController : ControllerBase
 
         return Ok(result);
     }
-
-    private static IEnumerable<T> GenerateFew<T>(Func<int, T> generator)
-    {
-        var count = Random.Shared.Next(3, 10);
-        return Enumerable.Range(0, count).Select(generator);
+    public GroupsController(GroupService groupService)
+    { 
+        _groupService = groupService;
     }
 }
