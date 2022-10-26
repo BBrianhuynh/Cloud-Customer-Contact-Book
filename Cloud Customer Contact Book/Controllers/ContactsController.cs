@@ -9,6 +9,7 @@ namespace WebApi.Controllers;
 public class ContactsController : ControllerBase
 {
     private readonly ContactService _contactService;
+    private readonly GroupService _groupService;
     /// <summary>
     /// Returns customer
     /// </summary>
@@ -32,18 +33,13 @@ public class ContactsController : ControllerBase
     /// </summary>
     /// <param name="contactId">ContactId</param>
     [HttpGet("{contactId:long}")]
+    [ProducesResponseType(typeof(ContactModel), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(long contactId)
     {
-        var result = new ContactModel
-        {
-            Id = Random.Shared.NextInt64(),
-            FirstName = "John",
-            LastName = "Smith",
-            PhoneNumber = "+12345678900",
-        };
+        var result = await _contactService.GetByIds(contactId);
 
-        return result == default ? NotFound() : Ok(result);
+        return result.Count == 0 ? NotFound() : Ok(result[0]);
     }
     /// <summary>
     /// Updates customer if specificed ID exists
@@ -81,5 +77,34 @@ public class ContactsController : ControllerBase
     {
         var result = await _contactService.Delete(contactId);
         return result ? Ok() : NotFound();
+    }
+    [HttpGet("{contactId:long}/Groups")]
+    [ProducesResponseType(typeof(IEnumerable<long>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetGroups(long contactId)
+    {
+        var contactGroups = await _groupService.GetAll(contactId);
+        return Ok(contactGroups.Select(x => x.Id));
+    }
+    [HttpPut("{contactId:long}/Groups/{groupId:long}")]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> AddGroup(long contactId, long groupId)
+    {
+        return await _groupService.AddContactToGroup_(contactId, groupId)
+            ? Ok()
+            : NotFound();
+    }
+    [HttpDelete("{contactId:long}/Groups/{groupId:long}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteGroup(long contactId, long groupId)
+    {
+        return await _groupService.RemoveContactFromGroup_(contactId, groupId)
+            ? Ok()
+            : NotFound();
+    }
+    public ContactsController(ContactService contactService, GroupService groupService)
+    {
+        _contactService = contactService;
+        _groupService = groupService;
     }
 }
