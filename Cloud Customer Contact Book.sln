@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud Customer Contact Book", "Cloud Customer Contact Book\Cloud Customer Contact Book.csproj", "{42A9726D-9CFA-4016-B417-D1F56A2B48F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud Customer Contact Book", "Cloud Customer Contact Book\Cloud Customer Contact Book.csproj", "{42A9726D-9CFA-4016-B417-D1F56A2B48F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudDatabase", "CloudDatabase\CloudDatabase.csproj", "{69079C2F-CB50-4DC0-8159-99AFDA2FBBBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{42A9726D-9CFA-4016-B417-D1F56A2B48F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42A9726D-9CFA-4016-B417-D1F56A2B48F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42A9726D-9CFA-4016-B417-D1F56A2B48F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69079C2F-CB50-4DC0-8159-99AFDA2FBBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69079C2F-CB50-4DC0-8159-99AFDA2FBBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69079C2F-CB50-4DC0-8159-99AFDA2FBBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69079C2F-CB50-4DC0-8159-99AFDA2FBBBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
