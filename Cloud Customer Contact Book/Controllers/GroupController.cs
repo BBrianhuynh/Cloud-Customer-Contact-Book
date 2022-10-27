@@ -20,6 +20,7 @@ public class GroupsController : ControllerBase
 
         return Ok(result);
     }
+
     /// <summary>
     /// Returns group with ID
     /// </summary>
@@ -33,6 +34,7 @@ public class GroupsController : ControllerBase
         var result = await _groupService.Get(groupId);
         return result == default ? NotFound() : Ok(result);
     }
+
     /// <summary>
     /// Updates Group if ID exists
     /// Otherwise return a 404 if ID does not exist
@@ -45,6 +47,7 @@ public class GroupsController : ControllerBase
         var result = await _groupService.Create(model);
         return Ok(result);
     }
+
     /// <summary>
     /// Puts data into API to create a new group
     /// </summary>
@@ -59,6 +62,7 @@ public class GroupsController : ControllerBase
 
         return result == default ? NotFound() : Ok(result);
     }
+
     /// <summary>
     /// Deletes group with specified ID
     /// </summary>
@@ -70,6 +74,7 @@ public class GroupsController : ControllerBase
     {
         return await _groupService.Delete(groupId) ? Ok() : NotFound();
     }
+
     /// <summary>
     /// Returns group ID from contacts
     /// </summary>
@@ -83,6 +88,7 @@ public class GroupsController : ControllerBase
 
         return Ok(result);
     }
+
     public GroupsController(GroupService groupService)
     { 
         _groupService = groupService;

@@ -13,7 +13,6 @@ public class ContactService
             LastName = lastName ?? "Smith",
             PhoneNumber = phoneNumber ?? "+12345678900",
         });
-
         return result.ToList();
     }
 
