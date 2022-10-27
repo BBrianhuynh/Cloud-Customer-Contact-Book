@@ -9,7 +9,6 @@ namespace WebApi.Controllers;
 public class ContactsController : ControllerBase
 {
     private readonly ContactService _contactService;
-    private readonly GroupService _groupService;
     /// <summary>
     /// Returns customer
     /// </summary>
@@ -77,34 +76,5 @@ public class ContactsController : ControllerBase
     {
         var result = await _contactService.Delete(contactId);
         return result ? Ok() : NotFound();
-    }
-    [HttpGet("{contactId:long}/Groups")]
-    [ProducesResponseType(typeof(IEnumerable<long>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetGroups(long contactId)
-    {
-        var contactGroups = await _groupService.GetAll(contactId);
-        return Ok(contactGroups.Select(x => x.Id));
-    }
-    [HttpPut("{contactId:long}/Groups/{groupId:long}")]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> AddGroup(long contactId, long groupId)
-    {
-        return await _groupService.AddContactToGroup_(contactId, groupId)
-            ? Ok()
-            : NotFound();
-    }
-    [HttpDelete("{contactId:long}/Groups/{groupId:long}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteGroup(long contactId, long groupId)
-    {
-        return await _groupService.RemoveContactFromGroup_(contactId, groupId)
-            ? Ok()
-            : NotFound();
-    }
-    public ContactsController(ContactService contactService, GroupService groupService)
-    {
-        _contactService = contactService;
-        _groupService = groupService;
     }
 }
