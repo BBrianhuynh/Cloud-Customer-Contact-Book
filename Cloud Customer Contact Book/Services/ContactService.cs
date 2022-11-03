@@ -1,11 +1,21 @@
 ﻿using Cloud_Customer_Contact_Book.Models;
+using CloudDatabase;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Services;
 
 public class ContactService
 {
+    private readonly CloudContactBookContext context;
+
+    public ContactService (CloudContactBookContext context)
+    {
+        this.context = context;
+    }
+
     public async Task<List<ContactModel>> GetAll(string? firstName = default, string? lastName = default, string? phoneNumber = default)
     {
+        var list = await context.Contacts.ToListAsync();
         var result = GenerateFew(_ => new ContactModel
         {
             Id = Random.Shared.NextInt64(),
@@ -13,7 +23,7 @@ public class ContactService
             LastName = lastName ?? "Smith",
             PhoneNumber = phoneNumber ?? "+12345678900",
         });
-        return result.ToList();
+        return list.Select(x => new ContactModel { Id = x.Id, FirstName = x.Name}).ToList();
     }
 
     public async Task<List<ContactModel>> GetByIds(params long[] ids)
