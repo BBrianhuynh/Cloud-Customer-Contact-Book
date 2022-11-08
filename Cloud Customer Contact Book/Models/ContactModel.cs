@@ -10,7 +10,7 @@ namespace Cloud_Customer_Contact_Book.Models
         /// Contact phone number.
         /// </summary>
         /// <example>+10987654321</example>
-        public string PhoneNumber { get; internal set; }
+        public string? PhoneNumber { get; internal set; }
         /// <summary>
         /// Contact identifier.
         /// </summary>
@@ -21,11 +21,11 @@ namespace Cloud_Customer_Contact_Book.Models
         /// </summary>
         /// <example>Will</example>
         [Required]
-        public object FirstName { get; internal set; }
+        public string FirstName { get; internal set; }
         /// <summary>
         /// Contact last mame.
         /// </summary>
         /// <example>Smith</example>
-        public object LastName { get; internal set; }
+        public string? LastName { get; internal set; }
     }
 }

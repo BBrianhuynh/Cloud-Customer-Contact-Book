@@ -23,7 +23,7 @@ public class ContactService
             LastName = lastName ?? "Smith",
             PhoneNumber = phoneNumber ?? "+12345678900",
         });
-        return list.Select(x => new ContactModel { Id = x.Id, FirstName = x.Name}).ToList();
+        return list.Select(x => new ContactModel { Id = x.Id, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber}).ToList();
     }
 
     public async Task<List<ContactModel>> GetByIds(params long[] ids)
