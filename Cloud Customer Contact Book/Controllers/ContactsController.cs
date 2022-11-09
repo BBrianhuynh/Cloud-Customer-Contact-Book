@@ -23,11 +23,6 @@ public class ContactsController : ControllerBase
         return Ok(result);
     }
 
-    private object GenerateFew(Func<object, ContactModel> p)
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     /// Returns customer with the same ID
     /// </summary>

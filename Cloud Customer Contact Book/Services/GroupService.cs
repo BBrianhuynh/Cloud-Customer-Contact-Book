@@ -6,8 +6,12 @@ namespace WebApi.Services;
 
 public class GroupService
 {
-    private readonly ContactService _contactService;
+    private readonly ContactService contactService;
 
+    public GroupService(ContactService contactService)
+    {
+        contactService = contactService;
+    }
     public async Task<List<GroupModel>> GetAll(long? contactId = default)
     {
         var result = GenerateFew(_ => new GroupModel
@@ -55,7 +59,6 @@ public class GroupService
 
         return result;
     }
-
     public async Task<bool> Delete(long groupId)
     {
         return true;
@@ -65,7 +68,7 @@ public class GroupService
     {
         var contactIds = GenerateFew(_ => Random.Shared.NextInt64());
 
-        return await _contactService.GetByIds(contactIds.ToArray());
+        return await contactService.GetByIds(contactIds.ToArray());
     }
 
     public async Task<bool> AddContactToGroup(long contactId, long groupId)
@@ -93,4 +96,5 @@ public class GroupService
         var count = Random.Shared.Next(3, 10);
         return Enumerable.Range(0, count).Select(generator);
     }
+
 }
