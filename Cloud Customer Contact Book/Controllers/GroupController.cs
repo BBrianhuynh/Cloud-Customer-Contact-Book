@@ -9,6 +9,7 @@ namespace WebApi.Controllers;
 public class GroupsController : ControllerBase
 {
     private readonly GroupService _groupService;
+
     /// <summary>
     /// Returns group
     /// </summary>

@@ -1,7 +1,6 @@
 ﻿using Cloud_Customer_Contact_Book.Models;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace WebApi.Services;
 
 public class GroupService
