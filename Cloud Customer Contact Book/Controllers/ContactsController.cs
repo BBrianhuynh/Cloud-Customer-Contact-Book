@@ -91,8 +91,8 @@ public class ContactsController : ControllerBase
     }
 
     [HttpPut("{contactId:long}/Groups/{groupId:long}")]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> AddGroup(long contactId, long groupId)
     {
         return await _groupService.AddContactToGroup_(contactId, groupId)
