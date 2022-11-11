@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace Cloud_Customer_Contact_Book.Models
 {
     public class ContactCreateModel

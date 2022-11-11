@@ -23,11 +23,6 @@ public class ContactsController : ControllerBase
         return Ok(result);
     }
 
-    private object GenerateFew(Func<object, ContactModel> p)
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     /// Returns customer with the same ID
     /// </summary>
@@ -41,6 +36,7 @@ public class ContactsController : ControllerBase
 
         return result.Count == 0 ? NotFound() : Ok(result[0]);
     }
+
     /// <summary>
     /// Updates customer if specificed ID exists
     /// otherwise returns a 404 if ID does not exist
@@ -53,6 +49,7 @@ public class ContactsController : ControllerBase
 
         return Ok(result);
     }
+
     /// <summary>
     /// Puts data into API to create a new customer
     /// </summary>
@@ -60,12 +57,14 @@ public class ContactsController : ControllerBase
     /// <param name="model">Model</param>
     [HttpPut("{contactId:long}")]
     [ProducesResponseType(typeof(ContactModel), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Put(long contactId, [FromBody] ContactCreateModel model)
     {
         var result = await _contactService.Update(contactId, model);
 
         return result == default ? NotFound() : Ok(result);
     }
+
     /// <summary>
     /// Deletes customer with the specified ID
     /// </summary>
@@ -78,6 +77,11 @@ public class ContactsController : ControllerBase
         var result = await _contactService.Delete(contactId);
         return result ? Ok() : NotFound();
     }
+    /// <summary>
+    /// Returns 
+    /// </summary>
+    /// <param name="contactId"></param>
+    /// <returns></returns>
     [HttpGet("{contactId:long}/Groups")]
     [ProducesResponseType(typeof(IEnumerable<long>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetGroups(long contactId)
@@ -85,7 +89,9 @@ public class ContactsController : ControllerBase
         var contactGroups = await _groupService.GetAll(contactId);
         return Ok(contactGroups.Select(x => x.Id));
     }
+
     [HttpPut("{contactId:long}/Groups/{groupId:long}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> AddGroup(long contactId, long groupId)
     {
@@ -93,6 +99,7 @@ public class ContactsController : ControllerBase
             ? Ok()
             : NotFound();
     }
+
     [HttpDelete("{contactId:long}/Groups/{groupId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -102,6 +109,7 @@ public class ContactsController : ControllerBase
             ? Ok()
             : NotFound();
     }
+
     public ContactsController(ContactService contactService, GroupService groupService)
     {
         _contactService = contactService;

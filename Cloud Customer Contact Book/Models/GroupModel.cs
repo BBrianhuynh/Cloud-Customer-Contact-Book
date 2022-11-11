@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace Cloud_Customer_Contact_Book.Models
 {
     /// <summary>
@@ -11,7 +12,7 @@ namespace Cloud_Customer_Contact_Book.Models
         /// </summary>
         /// <example>Family</example>
         [Required]
-        public object Name { get; internal set; }
+        public string Name { get; internal set; }
         /// <summary>
         /// Group identifier.
         /// </summary>
